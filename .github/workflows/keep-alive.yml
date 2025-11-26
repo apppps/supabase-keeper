@@ -1,0 +1,15 @@
+name: Supabase Keep Alive
+
+on:
+  schedule:
+    # 매일 한국 시간 오전 9시 (UTC 00:00) 실행
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase URL
+        # 아래 주소를 본인의 프로젝트 URL로 꼭 변경하세요
+        run: curl -I https://zxjeduvqxbruyvovppiz.supabase.co/rest/v1/
