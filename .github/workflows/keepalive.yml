@@ -1,0 +1,22 @@
+name: Keepalive Workflow
+
+on:
+  schedule:
+    # 60일 제한이므로 50일마다 한 번씩 실행 (오전 0시)
+    - cron: '0 0 1 * *'
+  workflow_dispatch: # 수동 실행 버튼 추가
+
+permissions:
+  contents: write
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Keepalive Action
+        uses: gautamkrishnar/keepalive-workflow@v1
+        with:
+          # 커밋 메시지를 변경하고 싶다면 아래 주석을 풀고 수정하세요
+          # commit_message: "Automated keepalive commit"
