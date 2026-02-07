@@ -2,9 +2,8 @@ name: Keepalive Workflow
 
 on:
   schedule:
-    # 매달 1일 오전 0시에 실행 (60일 제한 방지용)
-    - cron: '0 0 1 * *'
-  workflow_dispatch: # 수동 실행 버튼
+    - cron: '0 0 1 * *' # 매달 1일 자동으로 실행
+  workflow_dispatch:    # 수동 실행 버튼
 
 permissions:
   contents: write
@@ -14,7 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Keepalive Action
-        uses: gautamkrishnar/keepalive-workflow@v1
-        # with: 부분은 필요 없으므로 삭제했습니다.
+
+      - name: Auto Commit
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git commit --allow-empty -m "Automated keepalive commit"
+          git push
